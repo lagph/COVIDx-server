@@ -41,17 +41,17 @@ class User:
     def read():
         """
         read() : Fetches documents from Firestore collection as JSON
-        todo : Return document that matches query ID
-        all_todos : Return all documents
+        user : Return document that matches query ID
+        all_users : Return all documents
         """
         try:
             # Check if ID was passed to URL query
             user_id = request.args.get('uid')
             if user_id:
-                todo = users_ref.document(user_id).get()
-                return jsonify(todo.to_dict()), 200
+                user = users_ref.document(user_id).get()
+                return jsonify(user.to_dict()), 200
             else:
-                all_todos = [doc.to_dict() for doc in users_ref.stream()]
-                return jsonify(all_todos), 200
+                all_users = [doc.to_dict() for doc in users_ref.stream()]
+                return jsonify(all_users), 200
         except Exception as e:
             return f"An Error Occured: {e}"
